@@ -21,5 +21,6 @@ class Corrector
 		int** get_matrix(int m, int n);
 		void free_matrix(int** d, int m, int n);
 		int minim(int a, int b, int c);
+		char* dinamic(Candidate*** d, int n);
 };
 #endif // __CORRECTOR_H__
