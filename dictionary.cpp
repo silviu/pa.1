@@ -1,62 +1,66 @@
 #include "dictionary.h"
+#include <fstream>
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 #define MAX_WORD_SIZE 64
 
 Dictionary::Dictionary()
 {
-	dictionary = populate();
-	//printf("%s\n", dictionary);
+	populate();
+	it = word_map.begin();
 }
 
-Dictionary::~Dictionary()
+int Dictionary::get_frequency(string searched_word)
 {
-	free(dictionary);
+	map_t::iterator iter = word_map.find(searched_word);
+    if (iter != word_map.end())
+    	return iter->second;
+    return -1;
 }
 
-int get_file_size(FILE* f)
-{
-	int rt = fseek(f, 0, SEEK_END);
-	if (rt == -1) {
-		fprintf(stderr, "Error getting file size.");
-		return -1;
-	}
-	int size = ftell(f);
-	rt = fseek(f, 0, SEEK_SET);
-	if (rt == -1) {
-		fprintf(stderr, "Error seeking back at start of file.");
-		return -1;
-	}
-	return size;
-}
-
-char* Dictionary::populate()
+void Dictionary::populate()
 {
 	char word[MAX_WORD_SIZE];
-	int freq;
-	FILE* f = fopen("dict.txt", "r");
-	if (f == NULL) {
-		fprintf(stderr, "Error opening file.\n");
+	int frequency;
+	ifstream input_file;
+	
+	input_file.open("dict.txt", ifstream::in);
+	if (!input_file.is_open()) {
+		fprintf(stderr, "Error opening dict.txt");
 		exit(EXIT_FAILURE);
 	}
 	
-	int file_size = get_file_size(f);
-	//printf("FILESIZE = %d\n", file_size);
-	
-	char* dict = (char*)malloc(file_size);
-	int added = 0;
-	
-	while(!feof(f)) {
-		fscanf(f, "%s %d", word, &freq);
-		memcpy(dict + added, word, strlen(word));
-		added += strlen(word);
-		memcpy(dict + added, "$", 1);
-		added++;
+	while(input_file.good()) {
+		input_file >> word >> frequency;
+		word_map.insert(pair<string, int>(word, frequency));
 	}
 	
-	fclose(f);
-	return dict;
+	input_file.close();
 }
+
+void Dictionary::print()
+{
+	map_t::iterator it;
+	for (it = word_map.begin(); it != word_map.end(); ++it)
+		cout << it->first << " " << it->second << endl;
+}
+
+void Dictionary::reset_iterator()
+{
+	it = word_map.begin();
+}
+
+bool Dictionary::has_more_words()
+{
+	return (it != word_map.end());
+}
+
+char* Dictionary::get_next_word()
+{
+	string word = it->first;
+	it++;
+	char* ret = (char*) word.c_str();
+	return ret;
+}
+
 

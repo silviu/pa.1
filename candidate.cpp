@@ -1,20 +1,9 @@
 #include "candidate.h"
 
-Candidate::Candidate(int pstart, int pend, int pdist)
+Candidate::Candidate(char* pword, int pdist)
 {
-	start = pstart;
-	end = pend;
+	word = pword;
 	dist = pdist;
-}
-
-int Candidate::get_start()
-{
-	return start;
-}
-
-int Candidate::get_end()
-{
-	return end;
 }
 
 int Candidate::get_dist()
@@ -22,3 +11,18 @@ int Candidate::get_dist()
 	return dist;
 }
 
+char* Candidate::get_word()
+{
+	return word;
+}
+
+
+void Candidate::set_dist(int new_dist)
+{
+	dist = new_dist;
+}
+
+void Candidate::set_word(char* new_word)
+{
+	word = new_word;
+}

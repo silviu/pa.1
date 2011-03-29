@@ -8,17 +8,13 @@
 
 int main()
 {
-	vector<Candidate*> candidates;
+	pair<char*, vector<Candidate*> > candidate;
 	Corrector* corrector = new Corrector();
 	char* a = strdup("musicchannel");
-	char* b = strdup("music");
-	candidates = corrector->get_deviation(a, b);
-	for (unsigned int i = 0; i < candidates.size(); i++) {
-		int start  = candidates[i]->get_start();
-		int end = candidates[i]->get_end();
-		int dist = candidates[i]->get_dist();
-		cout << "[" << start << ", " << end << "] = "<< dist << endl;
-	}
+	//char* b = strdup("music");
+	
+	char* answer = corrector->correct(a);
+	cout << "Did you mean: " << answer << " ?" << endl;
 	return 0;
 }
 

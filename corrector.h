@@ -14,8 +14,8 @@ class Corrector
 {	
 	public:
 		Corrector();
-        vector<Candidate*> get_deviation(char* a, char* b);
-		void k_difference(char* a, char* b, int k);
+        Candidate**  get_deviation(char* a, char* b);
+        char* correct(char* search_terms);
 	private:
 		Dictionary* dictionary;
 		int** get_matrix(int m, int n);
