@@ -11,7 +11,7 @@ Candidate::Candidate()
 	word = (char*)"NULL";
 	dist = -1;
 	freq = -1;
-	nr_words = -1;
+	nr_words = 1;
 }
 
 int Candidate::get_dist()

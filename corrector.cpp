@@ -95,6 +95,8 @@ Candidate** Corrector::get_deviation(char* a, char* b)
 		//cout << d[i][len_b] << " ";
 		candidates[i-1]->set_dist(d[i][len_b]);
 		candidates[i-1]->set_word(strdup(b));
+		candidates[i-1]->set_nr_words(1);
+		candidates[i-1]->set_freq(dictionary->get_frequency(b));
 	}
 	//cout << endl;
 	free_matrix(d, m, n);
@@ -117,6 +119,7 @@ Candidate* compose(Candidate* c1, Candidate* c2)
 	ret->set_word(comp_word);
 	ret->set_freq(c1->get_freq() + c2->get_freq());
 	ret->set_nr_words(c1->get_nr_words() + c2->get_nr_words());
+	cout << "SETTING NR WORDS: " << c1->get_nr_words() + c2->get_nr_words() << endl;
 	return ret;
 }
 
@@ -173,14 +176,14 @@ char* Corrector::correct(char* search_terms)
 	for (int i = 0; i < n; i++)
 		for (int j= 0; j < n; j++) {
 			if (i == 0) {
-				din_mat[i][j] = new Candidate(strdup("NULL"), j);;
+				din_mat[i][j] = new Candidate();;
 				continue;
 			}
 			if (j == 0) {
-				din_mat[i][j] = new Candidate(strdup("NULL"), i);;
+				din_mat[i][j] = new Candidate();
 				continue;
 			}
-			din_mat[i][j] = new Candidate(strdup("NULL"), 7);
+			din_mat[i][j] = new Candidate();
 		}
 	
 	for (int i = 0; i < n; i++) {
@@ -212,6 +215,8 @@ char* Corrector::correct(char* search_terms)
 				if (candidates[j]->get_dist() < vmin[j]->get_dist()) {
 					vmin[j]->set_dist(candidates[j]->get_dist());
 					vmin[j]->set_word(candidates[j]->get_word());
+					vmin[j]->set_freq(candidates[j]->get_dist());
+					vmin[j]->set_nr_words(candidates[j]->get_nr_words());
 				}
 		}
 

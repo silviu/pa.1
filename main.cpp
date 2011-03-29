@@ -10,7 +10,7 @@ int main()
 {
 	pair<char*, vector<Candidate*> > candidate;
 	Corrector* corrector = new Corrector();
-	char* a = strdup("musicchannel");
+	char* a = strdup("supermarket");
 	//char* b = strdup("music");
 	
 	char* answer = corrector->correct(a);
