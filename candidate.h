@@ -8,6 +8,7 @@ class Candidate
 	public:
 		Candidate(char* word, int dist);
 		Candidate();
+	    ~Candidate();
 		int get_dist();
 		char* get_word();
 		int get_freq();
@@ -18,8 +19,8 @@ class Candidate
 		void set_freq(int pfreq);
 		void set_nr_words(int pnr_word);
 	private:
+        int dist;
 	    char* word;
-	    int dist;
 	    int freq;
 	    int nr_words;
 };

@@ -1,0 +1,23 @@
+Grijincu Silviu 
+334 CB
+Tema 1 PA - Spell checker
+
+Tema este implementata in c++
+
+In main.cpp citesc de la stdin cuvintele care se vor corectate.
+Creez un obiect Corrector, care va corecta intern stringul primit
+
+Clasa Corrector are doua metode publice: constructorul si metoda
+correct(), care este apelata din main cu stringul ce se doreste a fi
+corectat.
+
+Restul metodelor din clasa Corrector sunt private si tin de implementarea
+interna a corectorului. Metoda get_deviation() returneaza un vector de 
+candidati care sunt calculati folosind algoritmul Levenshtein de calculare
+a distantei intre doua stringuri.
+
+
+In metoda correct() primesc stringul de cautat si ii sterg toate spatiile.
+Creez o matrice in care tin deasupra diagonalei principale toti candidatii
+calculati prin get_deviation(). Peste aceasta matrice calculez dinamic
+solutia pentru stringul introdus.

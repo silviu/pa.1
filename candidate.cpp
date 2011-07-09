@@ -1,4 +1,5 @@
 #include "candidate.h"
+#include <stdlib.h>
 
 Candidate::Candidate(char* pword, int pdist)
 {
@@ -12,6 +13,11 @@ Candidate::Candidate()
 	dist = -1;
 	freq = -1;
 	nr_words = 1;
+}
+
+Candidate::~Candidate()
+{
+	free(word);
 }
 
 int Candidate::get_dist()

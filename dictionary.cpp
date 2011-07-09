@@ -1,6 +1,7 @@
 #include "dictionary.h"
 #include <fstream>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_WORD_SIZE 64
 
@@ -32,6 +33,8 @@ void Dictionary::populate()
 	
 	while(input_file.good()) {
 		input_file >> word >> frequency;
+		if (!strcmp(word,"et"))
+			continue;
 		word_map.insert(pair<string, int>(word, frequency));
 	}
 	

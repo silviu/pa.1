@@ -1,20 +1,19 @@
 #include <iostream>
-#include "dictionary.h"
 #include "corrector.h"
-#include "candidate.h"
 #include <string.h>
 #include <stdlib.h>
 #include <vector>
+#include <string>
 
 int main()
 {
 	pair<char*, vector<Candidate*> > candidate;
 	Corrector* corrector = new Corrector();
-	char* a = strdup("supermarket");
-	//char* b = strdup("music");
+	string search_terms;
+	getline(cin, search_terms);
 	
-	char* answer = corrector->correct(a);
-	cout << "Did you mean: " << answer << " ?" << endl;
+	char* answer = corrector->correct((char*)search_terms.c_str());
+	cout << answer << endl;
 	return 0;
 }
 
